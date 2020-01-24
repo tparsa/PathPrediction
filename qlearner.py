@@ -28,7 +28,7 @@ class QLearner:
     def _move(self):
         self._previous_state = self._state
         action = self._get_max_action(self._state)
-        observation = self.move_request(action)
+        observation = self.move_request(self._state, action)
         self._state = observation.get('state', self._state)
         energy = observation.get('energy', 0)
         time = observation.get('time', 0)
