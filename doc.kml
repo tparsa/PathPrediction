@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>ML_HW3_Map</name>
+    <description/>
+    <NetworkLink>
+      <name>ML_HW3_Map</name>
+      <Link>
+        <href>http://www.google.com/maps/d/kml?mid=1sYBzYAzJ99W9Le8IObYut6tvwy8QlJUJ</href>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>
