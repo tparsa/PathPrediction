@@ -19,8 +19,6 @@ class MapBuilder:
             self.G.add_edge(start, end, Energy=Energy, Time=Time)
 
     def next_State(self, state):
-        if (state == 11):
-            print('This state is terminal state and has no successor!')
         edges = [n for n in self.G.neighbors(state)]
         return edges
 

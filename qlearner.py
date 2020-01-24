@@ -3,11 +3,10 @@ import random
 from copy import deepcopy
 
 class QLearner:
-    def __init__(self, initial_state, criterion, move_request, terminal, alpha, gamma, next_state, decay=0.01):
+    def __init__(self, initial_state, criterion, move_request, terminal, alpha, gamma, next_state, decay=0.001):
         self._move_request = move_request
         self.criterion = criterion
         self._previous_state = None
-        print("FUUUUUUUUUUUUUUUCK:", initial_state)
         self._state = initial_state
         self._Q = {self._state: {}}
         self.alpha = alpha
@@ -22,7 +21,6 @@ class QLearner:
             return max(self._Q[state].items(), key=operator.itemgetter(1))[0]
         except Exception:
             self._Q[state] = {}
-            print("FUCUUUUK:", self._state)
             next_states = self.next_state(self._state)
             if len(next_states) != 0:
                 return random.choice(next_states)
@@ -41,15 +39,15 @@ class QLearner:
         else:
             next_states = self.next_state(self._state)
             if len(next_states) != 0:
-                return random.choice(next_states)
+                action = random.choice(next_states)
             else:
-                return self._terminal
+                action = self._terminal
         observation = self._move_request(self._state, action)
         self._state = observation.get('state', self._state)
         energy = observation.get('energy', 0)
         time = observation.get('time', 0)
         self._update(action, self.criterion(energy, time))
-        self.alpha -= self.decay
+        self.alpha = max(0, self.alpha - self.decay)
 
     def reset(self, initial_state):
         self._state = initial_state
