@@ -12,3 +12,9 @@ class Universe:
         next_state = action
         energy, time = self._map_builder.get_Reward(state, action)
         return {'state': next_state, 'energy': energy, 'time': time}
+
+    def get_initial_state(self):
+        return self._map_builder.initial_state()
+    
+    def get_terminal_state(self):
+        return self._map_builder.terminal_state()
