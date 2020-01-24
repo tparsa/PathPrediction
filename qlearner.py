@@ -1,5 +1,6 @@
 import operator
 import random
+from copy import deepcopy
 
 class QLearner:
     def __init__(self, move_request, criterion, initial_state, alpha, gamma, next_state):
@@ -24,5 +25,13 @@ class QLearner:
             self._Q[self._state] = {}
         self._Q[self._previous_state][action] = (1.0 - self.alpha) * self._Q[self._previous_state][action] + self.alpha * (reward + self._gamma * self._Q[self._state].get(self._get_max_action(self._state), 0))
 
-    
+    def _move(self):
+        self._previous_state = self._state
+        action = self._get_max_action(self._state)
+        observation = self.move_request(action)
+        self._state = observation.get('state', self._state)
+        energy = observation.get('energy', 0)
+        time = observation.get('time', 0)
+        self._update(action, self.criterion(energy, time))
+
         
