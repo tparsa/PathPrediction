@@ -3,10 +3,10 @@ class Universe:
         self._map_builder = map_builder
 
     def next_state(self, state):
-        return self._map_builder.next_state(state)
+        return self._map_builder.next_State(state)
     
     def move_request(self, state, action):
-        if action not in self._map_builder.next_state(state):
+        if action not in self._map_builder.next_State(state):
             raise Exception("Wrong action pal")
 
         next_state = action
